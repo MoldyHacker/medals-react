@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Medal from './Medal';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 class Country extends Component {
   getMedalsTotal(country, medals) {
@@ -17,31 +18,24 @@ class Country extends Component {
           <Card.Title className="d-flex justify-content-between">
             <span>
             { country.name }
-            <Badge bg="secondary" text="light" pill className="ml-2">
+            <Badge bg="secondary" text="light" pill className="ms-2">
               { this.getMedalsTotal(country, medals) }
             </Badge>
             </span>
           </Card.Title>
+          <ListGroup variant="flush">
+          { medals.map(medal =>
+          <ListGroup.Item className="d-flex justify-content-between" key={ medal.id }>
+            <Medal  
+              country={ country } 
+              medal={ medal } 
+              onIncrement={ onIncrement } 
+              onDecrement={ onDecrement } />
+          </ListGroup.Item>
+          ) }
+          </ListGroup>
         </Card.Body>
       </Card>
-      // <div className="country">
-      //   <div className="name">
-      //     { country.name }
-      //     <span className="badge">
-      //       { this.getMedalsTotal(country, medals) }
-      //     </span>
-      //   </div>
-      //   { medals.map(medal =>
-      //     <Medal 
-      //       key={ medal.id } 
-      //       country={ country } 
-      //       medal={ medal } 
-      //       onIncrement={ onIncrement } 
-      //       onDecrement={ onDecrement } />
-      //   ) }
-      //   <button onClick={() => onDelete(country.id)}>delete</button>
-      //   <hr />
-      // </div>
     );
   }
 }
