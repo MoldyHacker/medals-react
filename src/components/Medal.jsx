@@ -12,11 +12,15 @@ class Medal extends Component {
           { medal.name } Medals
         </div>
         <div className="medal-count">
-          <DashSquare className="me-2" />
+        <DashSquare 
+            onClick={ () => country[medal.name] > 0 && onDecrement(country.id, medal.name) } 
+            className="me-2 icon-btn" />
           <Badge bg="primary" text="light">
             { country[medal.name] }
           </Badge>
-          <PlusSquare className="ms-2" />
+          <PlusSquare 
+            onClick={ () => onIncrement(country.id, medal.name) }
+            className="ms-2 icon-btn" />
         </div>
       </React.Fragment>
     );
