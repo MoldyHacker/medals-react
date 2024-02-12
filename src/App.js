@@ -67,7 +67,7 @@ class App extends Component {
         <Container fluid>
         <Row>
         { this.state.countries.map(country => 
-          <Col className="mt-3" key={ country.id }>
+          <Col xs="12" md="6" lg="4" xl="2" className="mt-3" key={ country.id }>
             <Country  
               country={ country } 
               medals={ this.state.medals }
