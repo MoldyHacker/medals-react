@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 // import Modal from 'react-bootstrap/Modal';
 import Form from "react-bootstrap/Form";
@@ -6,7 +6,7 @@ import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer";
 import { PlusCircleFill } from "react-bootstrap-icons";
 
-const NewCountry = (props) => {
+const NewCountry = props => {
 	const [show, setShow] = useState(false);
 	const [newCountryName, setNewCountryName] = useState("");
 	const handleToastClose = () => {
@@ -19,10 +19,6 @@ const NewCountry = (props) => {
 		newCountryName.length > 0 && props.onAdd(newCountryName);
 		handleToastClose();
 	};
-
-	useEffect(() => {
-		if (show) {}
-	}, [show, newCountryName]);
 
 	return (
 		<React.Fragment>
