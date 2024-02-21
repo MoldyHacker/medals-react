@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import './App.css';
 
 const App = () => {
-  const apiEndpoint = "https://medals-api-6.azurewebsites.net/";
+  const apiEndpoint = "https://medals-api-6.azurewebsites.net";
   const [countries, setCountries] = useState([
     // Initial state can be empty or fetched from the API
   ]);
@@ -23,7 +23,7 @@ const App = () => {
   // Function to fetch countries from the API
   const fetchCountries = async () => {
     try {
-      const response = await axios.get(`${apiEndpoint}/countries`);
+      const response = await axios.get(`${apiEndpoint}/Api/country`);
       setCountries(response.data);
     } catch (error) {
       console.error("Error fetching countries:", error);
@@ -32,7 +32,7 @@ const App = () => {
 
   const handleAdd = async (name) => {
     try {
-      await axios.post(`${apiEndpoint}/countries`, { name, gold: 0, silver: 0, bronze: 0 });
+      await axios.post(`${apiEndpoint}/Api/country`, { name, gold: 0, silver: 0, bronze: 0 });
       fetchCountries(); // Refresh the list of countries after adding
     } catch (error) {
       console.error("Error adding country:", error);
@@ -41,11 +41,31 @@ const App = () => {
 
   const handleDelete = async (countryId) => {
     try {
-      await axios.delete(`${apiEndpoint}/countries/${countryId}`);
+      await axios.delete(`${apiEndpoint}/Api/country/${countryId}`);
       fetchCountries(); // Refresh the list of countries after deletion
     } catch (error) {
       console.error("Error deleting country:", error);
     }
+  };
+
+  const handleIncrement = (countryId, medalName) => {
+    const newCountries = countries.map(country => {
+      if (country.id === countryId) {
+        return { ...country, [medalName]: country[medalName] + 1 };
+      }
+      return country;
+    });
+    setCountries(newCountries);
+  };
+
+  const handleDecrement = (countryId, medalName) => {
+    const newCountries = countries.map(country => {
+      if (country.id === countryId) {
+        return { ...country, [medalName]: Math.max(country[medalName] - 1, 0) }; // Prevent negative values
+      }
+      return country;
+    });
+    setCountries(newCountries);
   };
 
   const getAllMedalsTotal = () => {
@@ -59,7 +79,7 @@ const App = () => {
   // Fetch countries when the component mounts
   useEffect(() => {
     fetchCountries();
-  }, []); // The empty array ensures this effect runs only once after the initial render
+  }, []); // The empty array ensures this effec  t runs only once after the initial render
 
   return (
     <React.Fragment>
