@@ -63,15 +63,6 @@ const App = () => {
 
   return (
     <React.Fragment>
-      {/* UI Code remains the same */}
-    </React.Fragment>
-  );
-};
-
-export default App;
-
-  return (
-    <React.Fragment>
       <Navbar className="navbar-dark bg-dark">
           <Container fluid>
             <Navbar.Brand>
