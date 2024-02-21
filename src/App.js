@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 import './App.css';
 
 const App = () => {
-  const apiEndpoint = "https://medals-api-6.azurewebsites.net";
+  const apiEndpoint = "https://medals-api-ccm.azurewebsites.net";
   const [countries, setCountries] = useState([
     // Initial state can be empty or fetched from the API
   ]);
