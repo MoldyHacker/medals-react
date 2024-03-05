@@ -11,8 +11,8 @@ import Col from 'react-bootstrap/Col';
 import './App.css';
 
 const App = () => {
-  const apiEndpoint = "https://medals-api-ccm.azurewebsites.net"; // "https://localhost:7226/api/country"  "https://medals-api-6.azurewebsites.net/"
-  const hubEndpoint = "https://medals-api-ccm.azurewebsites.net";
+  const apiEndpoint = "https://medals-api-ccm.azurewebsites.net/api/country"; // "https://localhost:7226/api/country"  "https://medals-api-6.azurewebsites.net/"
+  const hubEndpoint = "https://medals-api-ccm.azurewebsites.net/hubs/medals"; // "https://localhost:7226/hubs/medals" "https://medals-api-6.azurewebsites.net/hubs/medals
   const [ countries, setCountries ] = useState([]);
   const [ connection, setConnection] = useState(null);
   const medals = useRef([
@@ -29,7 +29,7 @@ const App = () => {
   useEffect(() => {
     // initial data loaded here
     async function fetchCountries() {
-      const { data : fetchedCountries } = await axios.get(`${apiEndpoint}/api/country`);
+      const { data : fetchedCountries } = await axios.get(`${apiEndpoint}`);
       // we need to save the original medal count values in state
       let newCountries = [];
       fetchedCountries.forEach(country => {
